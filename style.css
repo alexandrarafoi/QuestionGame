@@ -1,82 +1,177 @@
 
-/* --- Christmas Background --- */
+/* ===== Christmas theme (Cozy + Lively) ===== */
+
+/* Base & accessibility */
+* { box-sizing: border-box; }
+:root {
+  --bg-top: #0b1523;            /* deep winter blue */
+  --bg-bottom: #143361;         /* richer blue */
+  --glass: rgba(255,255,255,0.15);
+  --glass-border: rgba(255,255,255,0.35);
+  --text: #ffffff;
+  --gold: #ffdf6b;
+  --red: #ff4747;
+  --red-hover: #ff6a6a;
+  --error: #ffbaba;
+  --candy-red: #c3202f;
+  --candy-white: #ffffff;
+}
+
+html, body {
+  height: 100%;
+}
+
 body {
-    margin: 0;
-    padding: 0;
-    font-family: "Segoe UI", Arial, sans-serif;
-    background: linear-gradient(180deg, #0b1523 0%, #143361 100%);
-    color: #ffffff;
-    text-align: center;
-    overflow-x: hidden;
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: var(--text);
+  text-align: center;
+
+  /* Cozy winter gradient */
+  background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%);
+
+  /* Subtle stars for depth */
+  background-image:
+    radial-gradient(rgba(255,255,255,0.08) 1px, transparent 2px),
+    radial-gradient(rgba(255,255,255,0.06) 1px, transparent 2px);
+  background-size: 3px 3px, 5px 5px;
+  background-position: 0 0, 25px 15px;
+
+  overflow-x: hidden;
 }
 
-/* --- Frosted-glass card --- */
+/* Frosted glass question card with candy-cane border */
 .card {
-    max-width: 700px;
-    margin: 80px auto;
-    padding: 2rem;
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.35);
-    backdrop-filter: blur(6px);
-    box-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
+  max-width: 720px;
+  margin: 80px auto;
+  padding: 2rem;
+  background: var(--glass);
+  border-radius: 16px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 25px rgba(255,255,255,0.15);
+
+  /* Candy-cane border (A + D vibe) */
+  border: 8px solid transparent;
+  border-image: repeating-linear-gradient(
+    45deg,
+    var(--candy-white) 0 12px,
+    var(--candy-red) 12px 24px
+  ) 8 round;
 }
 
-/* --- Gold glowing title --- */
 .card h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: #ffdf6b;
-    text-shadow: 0 0     text-shadow: 0 0 10px #ffdf6b;
+  margin: 0 0 1rem 0;
+  font-size: 2rem;
+  color: var(--gold);
+  text-shadow: 0 0 10px var(--gold), 0 0 2px rgba(0,0,0,0.4);
 }
 
-/* --- Question text --- */
 .q {
-    font-size: 1.3rem;
-    line-height: 1.6rem;
-    margin-bottom: 1.5rem;
+  font-size: 1.25rem;
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
 }
 
-/* --- Error message --- */
 #err {
-    color: #ffbaba;
-    margin-top: 1rem;
-    display: none;
+  color: var(--error);
+  margin-top: 0.75rem;
+  display: none;
 }
 
-/* --- Christmas red button --- */
-button {
-    background: #ff4747;
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    font-size: 1rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.25s ease;
-    box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+/* Festive red button */
+button#next {
+  background: var(--red);
+  color: #fff;
+  border: none;
+  padding: 12px 22px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 140ms ease, background 140ms ease, box-shadow 140ms ease;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.35);
+}
+button#next:hover {
+  background: var(--red-hover);
+  transform: scale(1.05);
+  box-shadow: 0 0 16px rgba(255, 0, 0, 0.5);
 }
 
-button:hover {
-    background: #ff6a6a;
-    transform: scale(1.06);
+/* ===== Lively animated lights (D) ===== */
+.lights {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 70px;               /* visual strand height */
+  pointer-events: none;
+  z-index: 10;
+}
+.lights::before {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: 30px;
+  height: 4px;
+  background: #2b2b2b;        /* wire */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.35);
+}
+.lights::after {
+  /* a row of bulbs using multiple box-shadows, animated in hue */
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: 12px;
+  height: 0; width: 0;
+  box-shadow:
+    30px  0 0 8px #ff3b3b,
+    80px  0 0 8px #ffd93b,
+    130px 0 0 8px #53ff3b,
+    180px 0 0 8px #3bd9ff,
+    230px 0 0 8px #ff3bd9,
+    280px 0 0 8px #ff3b3b,
+    330px 0 0 8px #ffd93b,
+    380px 0 0 8px #53ff3b,
+    430px 0 0 8px #3bd9ff,
+    480px 0 0 8px #ff3bd9,
+    530px 0 0 8px #ff3b3b,
+    580px 0 0 8px #ffd93b,
+    630px 0 0 8px #53ff3b;
+  animation: bulbs 2.4s linear infinite;
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.4));
+}
+@keyframes bulbs {
+  0%   { filter: hue-rotate(0deg) drop-shadow(0 2px 3px rgba(0,0,0,0.4)); }
+  50%  { filter: hue-rotate(90deg) drop-shadow(0 2px 3px rgba(0,0,0,0.4)); }
+  100% { filter: hue-rotate(180deg) drop-shadow(0 2px 3px rgba(0,0,0,0.4)); }
 }
 
-/* --- Falling snow --- */
+/* ===== Gentle snowfall (A) ===== */
 .snowflake {
-    color: #ffffff;
-    font-size: 1.2rem;
-    position: fixed;
-    top: -10px;
-    animation-name: snow;
-    animation-duration: 10s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    z-index: 9999;
-    user-select: none;
-    pointer-events: none;
+  position: fixed;
+  top: -10px;
+  color: #fff;
+  opacity: 0.9;
+  font-size: 1.2rem;
+  user-select: none;
+  pointer-events: none;
+  z-index: 9;
+  animation-name: snow;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+@keyframes snow {
+  0%   { transform: translateY(-10px) rotate(0deg); }
+  100% { transform: translateY(110vh) rotate(360deg); }
 }
 
-@keyframes snow {
-    0% { transform: translateY(-10px) rotate(0deg); }
-    100% { transform: translateY(110vh) rotate(360deg); }
+/* Different sizes/speeds for variety */
+.s1 { left: 10%;  animation-duration: 9s;  animation-delay: 0s; }
+.s2 { left: 25%;  animation-duration: 12s; animation-delay: 1s; }
+.s3 { left: 40%;  animation-duration: 10s; animation-delay: 2s; }
+.s4 { left: 60%;  animation-duration: 13s; animation-delay: 0.5s; }
+.s5 { left: 75%;  animation-duration: 11s; animation-delay: 1.5s; }
+.s6 { left: 90%;  animation-duration: 14s; animation-delay: 2.5s; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .snowflake, .lights::after {
+    animation: none;
+  }
