@@ -1,69 +1,83 @@
 
+/* --- Christmas Background --- */
 body {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(#0b3d0b, #145214); /* dark christmas green */
-    color: #ffffff; /* readable white text */
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(180deg, #0b1523 0%, #143361 100%);
+    color: #ffffff;
     text-align: center;
+    overflow-x: hidden;
 }
 
-/* Snowflakes effect */
-body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('https://i.imgur.com/WS3i1Ra.png'); /* small snowflake pattern */
-    opacity: 0.20;
-    pointer-events: none;
-}
-
-/* Main container */
-.container {
+/* --- Frosted-glass card --- */
+.card {
+    max-width: 700px;
+    margin: 80px auto;
+    padding: 2rem;
     background: rgba(255, 255, 255, 0.15);
-    margin: 40px auto;
-    padding: 20px;
-    border-radius: 12px;
-    width: 80%;
-    max-width: 600px;
-    backdrop-filter: blur(5px);
-    border: 2px solid #c40000; /* christmas red */
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
 }
 
-/* Question text */
-#question {
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: #fffae6; /* warm gold-white */
+/* --- Gold glowing title --- */
+.card h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #ffdf6b;
+    text-shadow: 0 0 10px #ffdf6b;
 }
 
-/* Answer buttons */
+/* --- Question text --- */
+.q {
+    font-size: 1.3rem;
+    line-height: 1.6rem;
+    margin-bottom: 1.5rem;
+}
+
+/* --- Error message --- */
+#err {
+    color: #ffbaba;
+    margin-top: 1rem;
+    display: none;
+}
+
+/* --- Christmas red button --- */
 button {
-    display: block;
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border-radius: 8px;
+    background: #ff4747;
+    color: white;
     border: none;
-    font-size: 16px;
-    font-weight: bold;
+    padding: 12px 24px;
+    font-size: 1rem;
+    border-radius: 8px;
     cursor: pointer;
-    background-color: #c40000; /* christmas red */
-    color: #fff2cc; /* gold-ish */
-    transition: 0.2s;
+    transition: 0.25s ease;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
 }
 
 button:hover {
-    background-color: #a30000;
-    transform: scale(1.03);
+    background: #ff6a6a;
+    transform: scale(1.06);
 }
 
-/* Title */
-h1 {
-    color: #fffae6; /* warm gold */
-    margin-top: 20px;
+/* --- Falling snow --- */
+.snowflake {
+    color: #ffffff;
+    font-size: 1.2rem;
+    position: fixed;
+    top: -10px;
+    animation-name: snow;
+    animation-duration: 10s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    z-index: 9999;
+    user-select: none;
+    pointer-events: none;
+}
+
+@keyframes snow {
+    0% { transform: translateY(-10px) rotate(0deg); }
+    100% { transform: translateY(110vh) rotate(360deg); }
 }
