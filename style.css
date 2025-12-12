@@ -19,6 +19,12 @@ body {
     max-width: 600px;
     backdrop-filter: blur(4px);
     border: 2px solid #c40000;  /* Christmas red border */
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
 }
 
 /* TITLE */
@@ -62,4 +68,5 @@ button:hover {
     font-size: 22px;
     margin-top: 20px;
     color: #fff8d6;
+
 
