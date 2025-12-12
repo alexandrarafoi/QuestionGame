@@ -1,77 +1,51 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Random Question</title>
-
     <style>
-        body {
-            font-family: system-ui, Arial, sans-serif;
-            margin: 2rem;
-        }
-        .card {
-            max-width: 720px;
-            margin: auto;
-            padding: 1.5rem;
-            border: 1px solid #ddd;
-            border-radius: 12px;
-        }
-        .q {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-        }
-        .error {
-            color: #b00020;
-            margin-top: 1rem;
-        }
+        body { font-family: Arial, sans-serif; margin: 2rem; }
+        .card { max-width: 600px; margin: auto; padding: 1.5rem; border: 1px solid #ccc; border-radius: 12px; }
+        .q { font-size: 1.2rem; margin-bottom: 1rem; }
+        #err { color: red; display: none; }
     </style>
 </head>
-
 <body>
-    <div class="card">
-        <h2>Here's your question</h2>
-        <p id="q" class="q">Loading...</p>
-        <button id="next">Get another</button>
-       Array(data.questions)) {        <p id="err" class="error" style="display:none;"></p>
-                    throw new Error("JSON missing 'questions' array");
-                }
 
-                const list = data.questions;
-                const i = Math.floor(Math.random() * list.length);
-                qEl.textContent = list[i];
-                
-            } catch (e) {
-                console.error(e);
-                qEl.textContent = "Failed to load question.";
-                errEl.textContent = e.message;
-                errEl.style.display = "block";
-            }
-               }
+<div class="card">
+    <h2>Here's your question</h2>
+    <p id="q" class="q">Loading...</p>
+    <button id="next">Get another</button>
+    <p id="err"></p>
+</div>
 
-        document.getElementById("next").addEventListener("click", pickRandom);
+<script>
+async function pickRandom() {
+    document.getElementById("err").style.display = "none";
 
-        pickRandom();
-    </script>
+    try {
+        const res = await fetch("questions.json", { cache: "no-store" });
+        if (!res.ok) throw new Error("HTTP " + res.status + " " + res.statusText);
+
+        const data = await res.json();
+        if (!Array.isArray(data.questions)) throw new Error("Invalid JSON: missing 'questions' array");
+
+        const list = data.questions;
+        const idx = Math.floor(Math.random() * list.length);
+        document.getElementById("q").textContent = list[idx];
+
+    } catch (e) {
+        console.error(e);
+        document.getElementById("q").textContent = "Failed to load question.";
+        document.getElementById("err").textContent = e.message;
+        document.getElementById("err").style.display = "block";
+    }
+}
+
+document.getElementById("next").addEventListener("click", pickRandom);
+pickRandom();
+</script>
+
 </body>
-
-    </div>
-
-    <script>
-        const qEl = document.getElementById("q");
-        const errEl = document.getElementById("err");
-
-        async function pickRandom() {
-            errEl.style.display = "none";
-
-            try {
-                const res = await fetch("questions.json", { cache: "no-store" });
-
-                if (!res.ok) {
-                    throw new Error("HTTP " + res.status + " " + res.statusText);
-                }
-
-                const data = await res.json();
-
-
+</html>
