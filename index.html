@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Random Question</title>
+  <style>
+    body { font-family: system-ui, Arial; margin: 2rem; }
+    .card { max-width: 720px; margin: auto; padding: 1.5rem; border: 1px solid #ddd; border-radius: 12px; }
+    .q { font-size: 1.2rem; }
+    button { margin-top: 1rem; }
+  </style>
+</</head>
+<body>
+  <div class="card">
+    <h2>Here’s your question</h2>
+    <p id="q" class="q">Loading…</p>
+    <button id="next">Get another</button>
+  </div>
+  <script>
+    async function pickRandom() {
+      const res = await fetch('questions.json', { cache: 'no-store' });
+      const data = await res.json();
+      const qs = data.questions;
+      const idx = Math.floor(Math.random() * qs.length);
+      document.getElementById('q').textContent = qs[idx];
+    }
+    document.getElementById('next').addEventListener('click', pickRandom);
+    pickRandom();
+  </script>
+</body>
