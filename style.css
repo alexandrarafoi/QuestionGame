@@ -1,7 +1,5 @@
 
-/* ===== CHRISTMAS THEME ===== */
-
-/* Background: deep winter gradient with soft glow */
+/* --- Christmas Background --- */
 body {
     margin: 0;
     padding: 0;
@@ -12,11 +10,59 @@ body {
     overflow-x: hidden;
 }
 
-/* Card container with frosted glass effect */
+/* --- Frosted-glass card --- */
 .card {
     max-width: 700px;
-    margin: 80px ===== FALLING SNOW ===== */    margin: 80px auto;
+    margin: 80px auto;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
+}
 
+/* --- Gold glowing title --- */
+.card h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #ffdf6b;
+    text-shadow: 0 0     text-shadow: 0 0 10px #ffdf6b;
+}
+
+/* --- Question text --- */
+.q {
+    font-size: 1.3rem;
+    line-height: 1.6rem;
+    margin-bottom: 1.5rem;
+}
+
+/* --- Error message --- */
+#err {
+    color: #ffbaba;
+    margin-top: 1rem;
+    display: none;
+}
+
+/* --- Christmas red button --- */
+button {
+    background: #ff4747;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.25s ease;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+}
+
+button:hover {
+    background: #ff6a6a;
+    transform: scale(1.06);
+}
+
+/* --- Falling snow --- */
 .snowflake {
     color: #ffffff;
     font-size: 1.2rem;
@@ -34,52 +80,4 @@ body {
 @keyframes snow {
     0% { transform: translateY(-10px) rotate(0deg); }
     100% { transform: translateY(110vh) rotate(360deg); }
-
-    padding: 2rem;
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.35);
-    backdrop-filter: blur(6px);
-    box-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
-}
-
-/* Title - golden Christmas glow */
-h2 {
-    font-size: 2rem;
-    color: #ffdf6b;
-    text-shadow: 0 0 10px #ffdf6b;
-    margin-bottom: 1rem;
-}
-
-/* Question text */
-.q {
-    font-size: 1.3rem;
-    line-height: 1.6rem;
-    margin-bottom: 1.5rem;
-}
-
-/* Error text */
-#err {
-    color: #ffbaba;
-    margin-top: 1rem;
-    display: none;
-}
-
-/* Nice Christmas red button */
-button {
-    background: #ff4747;
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    font-size: 1rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.25s ease;
-    box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
-}
-
-button:hover {
-    background: #ff6a6a;
-    transform: scale(1.06);
-}
 
